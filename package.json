@@ -2,10 +2,14 @@
   "name": "fridge-monitor-render",
   "version": "1.0.0",
   "description": "A render server to handle reports from fridge monitor devices",
-  "main": "app.js",
+  "main": "./server/app.js",
   "repository": "https://github.com/glydeb/fridge-monitor-render.git",
   "author": "Glydewell Burdick <glydewellb@gmail.com>",
   "license": "MIT",
+  "scripts":{
+    "start": "node server/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "axios": "^1.6.7",
     "body-parser": "^1.20.2",
