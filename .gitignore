@@ -1,0 +1,17 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Environment variables
+.env
+
+# IDE files
+.vscode/
+
+# Logs
+logs/
+*.log
+
+# Miscellaneous
+.DS_Store
