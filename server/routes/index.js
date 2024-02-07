@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 
-// eslint-disable-next-line new-cap
 const router = express.Router();
 
 router.get('/', (req, res) => {

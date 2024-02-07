@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 
 // modules
 const index = require('./routes/index');
+const api = require('./routes/api');
 // const alert = require('./routes/alert');
 
 // serve static files
@@ -17,6 +18,7 @@ app.use(bodyParser.json());
 // express routes
 // app.use('/alert', alert);
 app.use('/', index);
+app.use('/api', api);
 
 // start server
 app.set('port', process.env.PORT || 5000);
