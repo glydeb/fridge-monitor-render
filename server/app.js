@@ -1,12 +1,13 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+require('dotenv').config(); // load .env variables
+
 const bodyParser = require('body-parser');
 
 // modules
 const index = require('./routes/index');
 const api = require('./routes/api');
-// const alert = require('./routes/alert');
 
 // serve static files
 app.use(express.static(path.join(__dirname, './public')));
@@ -16,7 +17,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 // express routes
-// app.use('/alert', alert);
 app.use('/', index);
 app.use('/api', api);
 
