@@ -6,7 +6,7 @@
   "repository": "https://github.com/glydeb/fridge-monitor-render.git",
   "author": "Glydewell Burdick <glydewellb@gmail.com>",
   "license": "MIT",
-  "scripts":{
+  "scripts": {
     "start": "node server/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "eslint": ">=5.16.0",
-    "eslint-config-google": "^0.14.0",
+    "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-react": "^7.33.2"
   }
 }
