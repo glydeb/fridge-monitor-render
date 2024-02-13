@@ -6,7 +6,7 @@ const { DISCORD_WEBHOOK_ID, DISCORD_KEY } = process.env;
 const url = `https://discord.com/api/webhooks/${DISCORD_WEBHOOK_ID}/${DISCORD_KEY}`;
 
 router.post('/', async (req, res) => {
-    console.log(JSON.stringify(req.body))
+    console.log(JSON.stringify(req))
     const { temperature, battery, message } = req.body;
 
     try {
@@ -15,7 +15,7 @@ router.post('/', async (req, res) => {
             content: `Temperature: ${temperature}, Battery: ${battery}, Message: ${message}`
         });
 
-        console.log(response.data);
+        console.log(response.status);
         res.status(200).json({ success: true });
     } catch (AxiosError) {
         const { delay, status } = handleAxiosError(AxiosError);
