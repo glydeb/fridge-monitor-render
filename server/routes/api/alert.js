@@ -6,7 +6,8 @@ const { DISCORD_WEBHOOK_ID, DISCORD_KEY } = process.env;
 const url = `https://discord.com/api/webhooks/${DISCORD_WEBHOOK_ID}/${DISCORD_KEY}`;
 
 router.post('/', async (req, res) => {
-    const { temperature, battery, message } = req.body.data;
+    console.log(JSON.stringify(req.body))
+    const { temperature, battery, message } = req.body;
 
     try {
         // Make a request to the Discord API
@@ -28,6 +29,7 @@ router.post('/', async (req, res) => {
 
         res.status(status).json(responseBody);
     }
+    res.send();
 });
 
 const handleAxiosError = (AxiosError) => {
