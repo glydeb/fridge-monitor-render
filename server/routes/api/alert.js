@@ -2,12 +2,16 @@ const express = require('express');
 const axios = require('axios');
 
 const router = express.Router();
-const { DISCORD_WEBHOOK_ID, DISCORD_KEY } = process.env;
-const url = `https://discord.com/api/webhooks/${DISCORD_WEBHOOK_ID}/${DISCORD_KEY}`;
 
 router.post('/', async (req, res) => {
     console.log(JSON.stringify(req.body));
-    const { temperature, battery, message } = req.body;
+    const { user, temperature, battery, message } = req.body;
+    try {
+        const url = alertUrl(user);
+    } catch (ReferenceError) {
+        res.status(400).json({ success: false, error: `Invalid user: ${user}` });
+        return;
+    }
 
     try {
         // Make a request to the Discord API
@@ -50,5 +54,24 @@ const handleAxiosError = (AxiosError) => {
 
     return { delay, status };
 };
+
+const alertUrl = (user) => {
+    userSecrets = userLookup(user);
+    return `https://discord.com/api/webhooks/${userSecrets.id}/${userSecret.key}`;
+}
+
+const userLookup = (user) => {
+    id = process.env(`${user}_DISCORD_WEBHOOK_ID`);
+    key = process.env(`${user}_DISCORD_KEY`);
+    if (!id || !key) {
+        const message = `No Discord webhook found for user ${user}`;
+        console.error(message);
+        throw new ReferenceError(message);
+    }
+    return {
+        id: id,
+        key: key
+    };
+}
 
 module.exports = router;
