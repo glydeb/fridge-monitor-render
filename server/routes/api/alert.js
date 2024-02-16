@@ -6,6 +6,7 @@ const router = express.Router();
 router.post('/', async (req, res) => {
     console.log(JSON.stringify(req.body));
     const { user, temperature, battery, message } = req.body;
+    console.log(`User: ${user}, Temperature: ${temperature}, Battery: ${battery}, Message: ${message}`);
     try {
         const url = alertUrl(user);
     } catch (ReferenceError) {
