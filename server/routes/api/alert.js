@@ -9,20 +9,24 @@ router.post('/', async (req, res) => {
     console.log(`User: ${user}, Temperature: ${temperature}, Battery: ${battery}, Message: ${message}`);
     try {
         const url = alertUrl(user);
+        console.log(`Sending alert to ${url}`)
     } catch (ReferenceError) {
+        console.log(ReferenceError.message);
         res.status(400).json({ success: false, error: `Invalid user: ${user}` });
         return;
     }
 
     try {
+        console.log("Sending alert")
         // Make a request to the Discord API
         const response = await axios.post(url, {
             content: `Temperature: ${temperature}, Battery: ${battery}, Message: ${message}`
         });
 
-        console.log(response.status);
+        // console.log(response.status);
         res.status(200).json({ success: true });
     } catch (AxiosError) {
+        console.log(AxiosError.message)
         const { delay, status } = handleAxiosError(AxiosError);
 
         console.log(`Retry in ${delay}s`);
@@ -58,12 +62,12 @@ const handleAxiosError = (AxiosError) => {
 
 const alertUrl = (user) => {
     userSecrets = userLookup(user);
-    return `https://discord.com/api/webhooks/${userSecrets.id}/${userSecret.key}`;
+    return `https://discord.com/api/webhooks/${userSecrets.id}/${userSecrets.key}`;
 }
 
 const userLookup = (user) => {
-    id = process.env(`${user}_DISCORD_WEBHOOK_ID`);
-    key = process.env(`${user}_DISCORD_KEY`);
+    id = process.env[`${user}_DISCORD_WEBHOOK_ID`];
+    key = process.env[`${user}_DISCORD_KEY`];
     if (!id || !key) {
         const message = `No Discord webhook found for user ${user}`;
         console.error(message);

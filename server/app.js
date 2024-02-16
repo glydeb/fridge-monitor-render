@@ -21,7 +21,7 @@ app.use('/', index);
 app.use('/api', api);
 
 // start server
-app.set('port', process.env.PORT || 5000);
+app.set('port', process.env.PORT || 5020);
 app.listen(app.get('port'), function() {
   console.log('listening on port ', app.get('port'));
 });
