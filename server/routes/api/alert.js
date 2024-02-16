@@ -7,8 +7,9 @@ router.post('/', async (req, res) => {
     console.log(JSON.stringify(req.body));
     const { user, temperature, battery, message } = req.body;
     console.log(`User: ${user}, Temperature: ${temperature}, Battery: ${battery}, Message: ${message}`);
+    let url;
     try {
-        const url = alertUrl(user);
+        url = alertUrl(user);
         console.log(`Sending alert to ${url}`)
     } catch (ReferenceError) {
         console.log(ReferenceError.message);
@@ -17,7 +18,6 @@ router.post('/', async (req, res) => {
     }
 
     try {
-        console.log("Sending alert")
         // Make a request to the Discord API
         const response = await axios.post(url, {
             content: `Temperature: ${temperature}, Battery: ${battery}, Message: ${message}`
